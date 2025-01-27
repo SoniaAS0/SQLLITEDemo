@@ -1,14 +1,14 @@
 ﻿
 
 using SQLite;
+using SQLLITEDemo.Abstractions;
 
 namespace SQLLITEDemo.MVVM.Model
 {
     [Table("Customer")]
-    public class Customer
+    public class Customer: TableData
     {
-        [ Column("id"), PrimaryKey, AutoIncrement]
-        public int id { get; set; }
+       
         [Column ("Name"), Indexed]
         public string Name { get; set; }=string.Empty;
         [Column("address"), MaxLength (100)]

@@ -33,7 +33,9 @@ namespace SQLLITEDemo.MVVM.ViewModel
 
         public ICommand AddorUpdateCommand => new Command(() =>
         {
-            App.CustomerRepository.AddOrUpdate(CurrentCustomer);
+            App.CustomerRepository.Save(CurrentCustomer);
+            App.OrderRepository.Save(new Order { CustomerId = CurrentCustomer.Id, OrderDate = DateTime.Now });
+            var orders = App.OrderRepository.GetAll();
             Refresh();
             CurrentCustomer = GenerateNewCustomer();
         });
@@ -50,7 +52,7 @@ namespace SQLLITEDemo.MVVM.ViewModel
         }
         public ICommand DeleteCommand => new Command(() =>
         {
-            App.CustomerRepository.Delete(CurrentCustomer.id);
+            App.CustomerRepository.Delete(CurrentCustomer);
             Refresh();
             CurrentCustomer = GenerateNewCustomer();
            

@@ -23,6 +23,7 @@ namespace SQLLITEDemo.Repositories
 
         }
 
+
         //Creamos los metodos CRUD
         public void AddOrUpdate(Customer customer)
         {
@@ -30,7 +31,7 @@ namespace SQLLITEDemo.Repositories
             //Por eso todo lo que no controlamso se devuelve con una excepcion
            try
            { 
-                if (customer.id == 0)
+                if (customer.Id == 0)
                 {
                     int rows = _conn.Insert(customer);
                     //Esto nos devuelve un entero y ese entero es el que inserta el objeto, el valor que retorna es el valor de filas que se añaden a la tabla
@@ -63,11 +64,11 @@ namespace SQLLITEDemo.Repositories
         public Customer GetById(int id)
         {   
             //se está devolviendo el primero o nulo donde coincida que el id del customer de la tabla sea igual que el id que le paso como parametro
-            return _conn.Table<Customer>().FirstOrDefault(c=>c.id == id);
+            return _conn.Table<Customer>().FirstOrDefault(c=>c.Id == id);
         }
         public void Delete(int id)
         {
-            try
+            try 
             {
                 int rows= _conn.Delete<Customer>(id);
                 StatusMessage = $"{rows} records deleted";
